@@ -1,0 +1,81 @@
+{
+ "place_id": "1854586411",
+ "collected": "2026-11-12",
+ "source": "https://m.place.naver.com/place/1854586411/home",
+ "name": "반도기술",
+ "category": "기계,장비제조",
+ "categoryCodes": [
+  "225111",
+  "225117",
+  "225187",
+  "225618"
+ ],
+ "phone": null,
+ "virtualPhone": null,
+ "phone_note": "번호 비공개",
+ "roadAddress": "충남 천안시 동남구 성남면 석곡1길 2-4 구보다농기계충남동부대리점",
+ "address": "충남 천안시 동남구 성남면 석곡리 421-1",
+ "coordinate": {
+  "x": "127.2220703",
+  "y": "36.7412647"
+ },
+ "businessHours": [],
+ "businessHoursRaw": [],
+ "conveniences": null,
+ "keywordList": [
+  "충북호이스트",
+  "충남호이스트",
+  "천안호이스트",
+  "호이스트제작",
+  "호이스트수리"
+ ],
+ "descriptions": [
+  "호이스트 제작,수리 전문!!\n중고호이스트\n중고.이전.설치.매매\n크레인 제작\n무선리모컨 설치\n모터, 트로리바 제작 설치\n아이빔행거 제작\n문의 및 상담환영합니다",
+  "전화를 대신 받고 응대까지 해드려요!"
+ ],
+ "menus": null,
+ "links": [
+  {
+   "type": "홈페이지",
+   "url": "http://010-8819-9119.114web.kr/"
+  }
+ ],
+ "reviews": {
+  "cafeBlogTotal": 1,
+  "visitorTotal": 1,
+  "visitorScore": 0,
+  "fsasTotal": 1,
+  "samples": [
+   {
+    "type": "블로그",
+    "title": "충북 충남 천안 호이스트 제작 수리",
+    "url": "https://m.blog.naver.com/systom/222514150773",
+    "name": "유익한정보 114",
+    "date": "2021.09.23."
+   }
+  ]
+ },
+ "photos": [
+  {
+   "id": "1854586411_business_1",
+   "title": "반도기술",
+   "originalUrl": "https://ldb-phinf.pstatic.net/20210928_107/1632792557110gQD3R_PNG/-rhq258uE7d-5jsB8v5VGequ.png",
+   "w": 767,
+   "h": 730
+  },
+  {
+   "id": "1854586411_business_2",
+   "title": "거리뷰",
+   "originalUrl": "https://panorama.map.naver.com/api/v2/thumbnail/fsd_BXcqsl-xJulREjvFYg?heading=-22.82&tilt=10.38&fov=68&width=800&height=400&caller=place",
+   "w": 800,
+   "h": 400
+  }
+ ],
+ "images": [
+  {
+   "origin": "https://ldb-phinf.pstatic.net/20210928_107/1632792557110gQD3R_PNG/-rhq258uE7d-5jsB8v5VGequ.png",
+   "title": null
+  }
+ ],
+ "label": "반도기술"
+}
