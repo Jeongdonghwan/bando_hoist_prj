@@ -6,7 +6,6 @@ import { compose } from '../../lib/compose';
 import { breadcrumbJsonLd, faqJsonLd, itemListJsonLd, serviceJsonLd } from '../../lib/jsonld';
 import { BRAND, shareMeta } from '../../lib/site';
 import { Actions, Crumbs, IconArrow, JsonLd, SectionHead } from '../../components/Common';
-import { Drawing } from '../../components/Drawing';
 
 export const dynamicParams = false;
 
@@ -46,15 +45,14 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
         itemListJsonLd(relList.length ? relList : [{ name: `${p.city} 출장 지역 안내`, path: cityEncodedPath(p.city) }]),
       ]} />
 
-      <section className="top">
+      <section className="top top-page">
         <div className="wrap top-in">
           <div className="top-text">
             <Crumbs items={[{ name: '홈', href: '/' }, { name: '출장 지역', href: '/area/' }, { name: p.city, href: cityPath(p.city) }, { name: c.eyebrow }]} />
             <h1>{c.h1}</h1>
             <p className="lead">{c.lead}</p>
-            <Actions />
+            <Actions light />
           </div>
-          <div className="top-fig"><Drawing kind={c.drawing} caption={`구조 설명도 · ${c.wl} · 치수는 현장 실측`} /></div>
         </div>
       </section>
 

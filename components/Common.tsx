@@ -1,4 +1,4 @@
-// 공통 UI — 이모지 없이 선 아이콘, 각진(0~2px) 버튼, 모노 라벨 섹션 머리(번호 없음).
+// 공통 UI — 이모지 없이 선 아이콘, 각진(0~4px) 버튼, 영문 라벨 섹션 머리(번호 없음).
 import Link from 'next/link';
 import { BRAND, CONTACT, BUSINESS, tel, smsHref } from '../lib/site';
 
@@ -14,12 +14,12 @@ export const IconMsg = () => <Svg d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2
 export const IconArrow = () => <Svg d="M5 12h14M13 6l6 6-6 6" size={16} />;
 export const IconPin = () => <Svg d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12zM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" size={17} />;
 
-// 로고 글리프 — 강청색 사각 + 아이빔 + 훅 (app/icon.png 와 같은 모양)
+// 로고 글리프 — 남색 사각(청록 테두리) + 아이빔 + 훅 (app/icon.png 와 같은 모양, 헤더가 짙어 색만 맞춤)
 export const Mark = ({ size = 34 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true" className="mark">
-    <rect width="32" height="32" fill="#12324f" />
+    <rect x="0.75" y="0.75" width="30.5" height="30.5" fill="#13243d" stroke="#3fcfbb" strokeWidth="1.5" />
     <path d="M6 8h20M6 11h20M16 8v3" stroke="#fff" strokeWidth="2" fill="none" />
-    <path d="M16 11v7m0 0a4 4 0 1 1-4 4" stroke="#e5322d" strokeWidth="2.4" fill="none" strokeLinecap="square" />
+    <path d="M16 11v7m0 0a4 4 0 1 1-4 4" stroke="#3fcfbb" strokeWidth="2.4" fill="none" strokeLinecap="square" />
   </svg>
 );
 
@@ -32,9 +32,9 @@ export const Actions = ({ sms = true, map = false, light = false }: { sms?: bool
   </div>
 );
 
-// 섹션 머리 — 위 1px 선이 그려지며 등장, 모노 라벨(영문 약어) + 제목
-export const SectionHead = ({ k, title, sub }: { k?: string; title: string; sub?: string }) => (
-  <header className="sh" data-reveal>
+// 섹션 머리 — 영문 라벨 앞 청록 선이 그려지며 등장 + 제목. c = 가운데 정렬(홈 띠 섹션)
+export const SectionHead = ({ k, title, sub, c }: { k?: string; title: string; sub?: string; c?: boolean }) => (
+  <header className={c ? 'sh c' : 'sh'} data-reveal>
     {k && <span className="sh-k">{k}</span>}
     <h2>{title}</h2>
     {sub && <p>{sub}</p>}

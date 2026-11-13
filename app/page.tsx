@@ -5,7 +5,6 @@ import { getPosts, postPath } from '../lib/blog';
 import { BRAND, CONTACT, BUSINESS, shareMeta } from '../lib/site';
 import { faqJsonLd, itemListJsonLd } from '../lib/jsonld';
 import { Actions, IconArrow, JsonLd, SectionHead } from '../components/Common';
-import { Drawing } from '../components/Drawing';
 
 const HOME_TITLE = `${BRAND} | 호이스트 제작·수리, 중고 호이스트 이전 설치`;
 const HOME_DESC = '천안 성남면 반도기술. 호이스트 제작·수리, 중고 호이스트 중고·이전·설치·매매, 크레인 제작, 무선리모컨 설치, 모터·트로리바·아이빔 행거 제작. 충남·충북 출장.';
@@ -82,23 +81,28 @@ export default function Home() {
             <p className="kicker">HOIST · CRANE — 충남 천안시 동남구 성남면</p>
             <h1><span>호이스트 제작·수리,</span><span>중고 호이스트 이전 설치</span></h1>
             <p className="lead">{BRAND}은 호이스트 본체부터 트롤리·모터, 아이빔 행거, 무선리모컨까지 직접 만들고 고칩니다. 쓰던 호이스트를 새 공장으로 옮겨 다는 일과 중고 매매도 함께 합니다.</p>
-            <Actions />
+            <Actions light />
           </div>
-          <div className="top-fig"><Drawing kind="hoist" caption="구조 설명도 · 아이빔 + 트롤리 + 호이스트 · 치수는 현장 실측" /></div>
+          <figure className="hero-photo">
+            <img src="/img/workshop.jpg" alt={`${BRAND} 작업장 외관 - 천안 동남구 성남면 석곡1길`} width={800} height={400} fetchPriority="high" />
+            <figcaption>성남면 석곡리 작업장 외관 · 네이버 플레이스 거리뷰</figcaption>
+          </figure>
         </div>
+      </section>
+      <div className="facts">
         <div className="wrap">
-          <dl className="titleblock" data-reveal>
+          <dl className="titleblock">
             <div><dt>상호</dt><dd>{BRAND}</dd></div>
             <div><dt>작업장</dt><dd>{BUSINESS.address}</dd></div>
             <div><dt>전화</dt><dd><a href={`tel:${CONTACT.phone.replace(/-/g, '')}`}>{CONTACT.phone}</a></dd></div>
             <div><dt>출장</dt><dd>충남 · 충북 · 강원(일정 조율)</dd></div>
           </dl>
         </div>
-      </section>
+      </div>
 
-      <div className="wrap">
-        <section className="sec">
-          <SectionHead k="SCOPE" title="작업 사양표" sub="네이버 플레이스 소개에 적은 작업 일곱 가지입니다. 규격과 수량은 현장마다 실측해 정합니다." />
+      <section className="band-steel scope-band">
+        <div className="wrap sec">
+          <SectionHead c k="SCOPE" title="작업 사양표" sub="네이버 플레이스 소개에 적은 작업 일곱 가지입니다. 규격과 수량은 현장마다 실측해 정합니다." />
           <table className="scope scope-home" data-reveal>
             <thead><tr><th scope="col">작업</th><th scope="col">내용</th><th scope="col">상담 때 알려 주실 것</th></tr></thead>
             <tbody>
@@ -114,17 +118,30 @@ export default function Home() {
               })}
             </tbody>
           </table>
-        </section>
-      </div>
+        </div>
+      </section>
 
       <section className="band-navy">
         <div className="wrap sec">
-          <SectionHead k="PARTS" title="호이스트를 이루는 부분과 손보는 곳" sub="본체만 보지 않고 레일·트롤리·조작 장치까지 같이 봅니다." />
+          <SectionHead c k="PARTS" title="호이스트를 이루는 부분과 손보는 곳" sub="본체만 보지 않고 레일·트롤리·조작 장치까지 같이 봅니다." />
           <ul className="parts reveal-group">
             {PARTS.map((x) => <li key={x.k}><span className="pk">{x.k}</span><h3>{x.t}</h3><p>{x.d}</p></li>)}
           </ul>
         </div>
       </section>
+
+      <div className="wrap">
+        <section className="sec workshop">
+          <SectionHead k="WORKSHOP" title="작업장" sub="천안시 동남구 성남면 석곡리에서 제작하고, 현장으로 출장해 설치·수리합니다." />
+          <dl className="info trust" data-reveal>
+            <div><dt>주소</dt><dd>{BUSINESS.address}</dd></div>
+            <div><dt>지번</dt><dd>성남면 석곡리 421-1</dd></div>
+            <div><dt>전화</dt><dd>{CONTACT.phone}</dd></div>
+            <div><dt>영업시간</dt><dd>미등록 · 방문 전 통화로 확인</dd></div>
+          </dl>
+          <p className="more-line"><a className="btn-text" href={BUSINESS.place} target="_blank" rel="noopener noreferrer">네이버 플레이스에서 위치 보기 <IconArrow /></a></p>
+        </section>
+      </div>
 
       <section className="band-steel">
         <div className="wrap sec">
@@ -146,8 +163,10 @@ export default function Home() {
           <SectionHead k="PROCESS" title="진행 순서" />
           <ol className="flow reveal-group">{FLOW.map((x) => <li key={x.t}><strong>{x.t}</strong><p>{x.d}</p></li>)}</ol>
         </section>
+      </div>
 
-        <section className="sec" id="area">
+      <section className="band-steel">
+        <div className="wrap sec" id="area">
           <SectionHead k="AREA" title="출장 지역" sub="플레이스 대표 키워드(충북·충남·천안 호이스트) 기준입니다." />
           <table className="area-table" data-reveal>
             <tbody>
@@ -162,24 +181,10 @@ export default function Home() {
           <ul className="linklist cols3">
             {cities.map((c) => base(c)).filter(Boolean).map((p) => <li key={p!.slug}><Link href={pagePath(p!)}>{p!.kw}<IconArrow /></Link></li>)}
           </ul>
-        </section>
+        </div>
+      </section>
 
-        <section className="sec workshop">
-          <SectionHead k="WORKSHOP" title="작업장" />
-          <div className="cols" data-reveal>
-            <figure className="ws-photo">
-              <img src="/img/workshop.jpg" alt={`${BRAND} 작업장 외관 - 천안 동남구 성남면 석곡1길`} width={800} height={400} loading="lazy" />
-              <figcaption>성남면 석곡리 작업장 외관 · 네이버 플레이스 거리뷰</figcaption>
-            </figure>
-            <dl className="info">
-              <div><dt>주소</dt><dd>{BUSINESS.address}</dd></div>
-              <div><dt>지번</dt><dd>성남면 석곡리 421-1</dd></div>
-              <div><dt>전화</dt><dd>{CONTACT.phone}</dd></div>
-              <div><dt>영업시간</dt><dd>미등록 · 방문 전 통화로 확인</dd></div>
-            </dl>
-          </div>
-        </section>
-
+      <div className="wrap">
         <section className="sec">
           <SectionHead k="FAQ" title="자주 묻는 질문" />
           <div className="faq">{FAQ.map((f) => <details key={f.q} data-reveal><summary>{f.q}<i /></summary><p>{f.a}</p></details>)}</div>
