@@ -17,7 +17,7 @@ const TRIP: Record<string, string> = {
   home: '반도기술 작업장이 있는 시입니다. 현장 확인 일정을 잡기 쉬운 권역입니다.',
   cn: '충남 출장 지역입니다. 방문 날짜는 작업 내용을 듣고 통화로 정합니다.',
   cb: '충북 출장 지역입니다. 증상과 현장 위치를 먼저 듣고 일정을 맞춥니다.',
-  gw: '강원 지역은 거리가 있어 출장 일정을 통화로 조율합니다.',
+  gw: '강원 출장 지역입니다. 작업 내용을 듣고 방문 일정을 통화로 조율합니다.',
 };
 
 export function generateMetadata({ params }: { params: { city: string } }): Metadata {

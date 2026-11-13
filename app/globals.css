@@ -59,7 +59,7 @@ img { max-width: 100%; height: auto; display: block; }
 .top-home .top-in { display: flex; align-items: center; min-height: min(640px, 82vh); padding-top: 72px; padding-bottom: 56px; position: static; }
 .hero-photo { position: absolute; top: 0; right: 0; bottom: 0; width: 56%; margin: 0; clip-path: polygon(22% 0, 100% 0, 100% 100%, 4% 100%); overflow: hidden; }
 .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
-.hero-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, var(--navy) 0%, rgba(10, 22, 40, .7) 30%, rgba(10, 22, 40, .2) 100%); }
+.hero-photo::after, .kw-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, var(--navy) 0%, rgba(10, 22, 40, .7) 30%, rgba(10, 22, 40, .2) 100%); }
 .hero-photo figcaption { position: absolute; z-index: 1; right: 24px; bottom: 18px; font-size: .74rem; color: rgba(255, 255, 255, .8); }
 .top-page { padding: 48px 0 80px; }
 .top-page::after { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 42%; background: linear-gradient(90deg, var(--navy) 0%, rgba(10, 22, 40, .82) 45%, rgba(10, 22, 40, .55) 100%), url(/img/workshop.jpg) center / cover; clip-path: polygon(28% 0, 100% 0, 100% 100%, 8% 100%); }
@@ -268,7 +268,7 @@ table { border-collapse: collapse; width: 100%; }
   .cols { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .top-home .top-in { flex-direction: column; align-items: stretch; min-height: 0; padding-top: 0; padding-bottom: 0; }
   .hero-photo { position: relative; order: -1; width: auto; height: 240px; margin: 0 -24px; clip-path: polygon(0 0, 100% 0, 100% 86%, 0 100%); }
-  .hero-photo::after { background: linear-gradient(0deg, var(--navy) 0%, rgba(10, 22, 40, .15) 60%); }
+  .hero-photo::after, .kw-photo::after { background: linear-gradient(0deg, var(--navy) 0%, rgba(10, 22, 40, .15) 60%); }
   .hero-photo figcaption { right: 16px; bottom: auto; top: 12px; }
   .top-home .top-text { padding: 8px 0 48px; }
   .top-page::after { display: none; }
@@ -318,4 +318,33 @@ table { border-collapse: collapse; width: 100%; }
   .btn-primary { width: 100%; justify-content: center; }
   .closing { padding: 72px 0 80px; }
   .foot-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+}
+
+/* 사진 — 홈 히어로 아래 4장 줄, 키워드 히어로 사진 + 요약 아래 3장 줄 */
+.top-home .top-in { min-height: min(520px, 64vh); padding-top: 56px; padding-bottom: 48px; }
+.photo-strip { margin-top: 32px; }
+.ps-home { margin-top: 0; background: var(--navy); padding: 0 0 28px; }
+.ps-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.ps-home .ps-grid { grid-template-columns: 1.3fr 1fr 1fr 1.3fr; }
+.photo-strip figure { position: relative; margin: 0; overflow: hidden; border-radius: 2px; background: var(--navy-2); }
+.photo-strip img { width: 100%; height: 210px; object-fit: cover; transition: transform .8s var(--ease); }
+.ps-home img { height: 230px; }
+.photo-strip figure:hover img { transform: scale(1.04); }
+.photo-strip figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 8px 12px; font-size: .78rem; line-height: 1.4; color: #fff; background: rgba(6, 13, 23, .66); }
+.top-kw::after { display: none; }
+.kw-photo { position: absolute; top: 0; right: 0; bottom: 0; width: 44%; margin: 0; clip-path: polygon(26% 0, 100% 0, 100% 100%, 6% 100%); }
+.kw-photo img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 900px) {
+  .top-home .top-in { min-height: 0; padding-top: 0; padding-bottom: 0; }
+  .ps-grid, .ps-home .ps-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .photo-strip figure:first-child:nth-last-child(3) { grid-column: 1 / -1; }
+  .photo-strip img, .ps-home img { height: 150px; }
+  .top-kw { padding-top: 0; }
+  .kw-photo { position: relative; width: auto; height: 190px; clip-path: polygon(0 0, 100% 0, 100% 86%, 0 100%); }
+  .top-kw .top-in { padding-top: 4px; }
+}
+@media (max-width: 600px) {
+  .photo-strip img, .ps-home img { height: 124px; }
+  .photo-strip figcaption { font-size: .7rem; padding: 6px 8px; }
+  .kw-photo { height: 170px; }
 }

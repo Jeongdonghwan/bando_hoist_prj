@@ -1,6 +1,7 @@
 // 공통 UI — 이모지 없이 선 아이콘, 각진(0~4px) 버튼, 영문 라벨 섹션 머리(번호 없음).
 import Link from 'next/link';
 import { BRAND, CONTACT, BUSINESS, tel, smsHref } from '../lib/site';
+import type { Photo } from '../lib/photos';
 
 export const JsonLd = ({ data }: { data: object | object[] }) => (
   <>{(Array.isArray(data) ? data : [data]).map((d, i) => <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(d).replace(/</g, '\\u003c') }} />)}</>
@@ -39,6 +40,20 @@ export const SectionHead = ({ k, title, sub, c }: { k?: string; title: string; s
     <h2>{title}</h2>
     {sub && <p>{sub}</p>}
   </header>
+);
+
+// 사진 줄 — 히어로 바로 아래. 캡션은 장면 설명(스톡은 업체 작업으로 표기하지 않음)
+export const PhotoStrip = ({ photos, label, home }: { photos: Photo[]; label: string; home?: boolean }) => (
+  <section className={home ? 'photo-strip ps-home' : 'photo-strip'} aria-label={label}>
+    <div className="wrap ps-grid">
+      {photos.map((p) => (
+        <figure key={p.src}>
+          <img src={p.small} alt={p.alt} width={640} height={Math.round((640 * p.h) / p.w)} loading="lazy" decoding="async" />
+          <figcaption>{p.alt}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
 );
 
 export const Crumbs = ({ items }: { items: { name: string; href?: string }[] }) => (

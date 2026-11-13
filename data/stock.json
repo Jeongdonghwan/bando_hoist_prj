@@ -1,0 +1,71 @@
+{
+ "note": "Unsplash 무료 라이선스 사진 — 반도기술 작업 사진 아님. 일반 장면 설명만 쓰고 현장·시공 사례로 표기하지 않음. 다른 업체 로고·전화번호·간판 있는 사진 제외.",
+ "photos": [
+  {
+   "id": "s1",
+   "file": "public/img/stock/s1.jpg",
+   "w": 1200,
+   "h": 800,
+   "source": "https://unsplash.com/photos/MAiWJ634gCA",
+   "image": "https://images.unsplash.com/photo-1761519609296-b7cbf5778ca6",
+   "author": "Sean Thoman",
+   "license": "Unsplash License (free, not Unsplash+)",
+   "alt": "공장 천장 아래 매달린 노란색 크레인 훅"
+  },
+  {
+   "id": "s2",
+   "file": "public/img/stock/s2.jpg",
+   "w": 1200,
+   "h": 800,
+   "source": "https://unsplash.com/photos/Akl_ieHtIHk",
+   "image": "https://images.unsplash.com/photo-1762608674180-2e6e19ffb614",
+   "author": "Sergej",
+   "license": "Unsplash License (free, not Unsplash+)",
+   "alt": "주행 보에 달린 와이어 호이스트와 훅 블록"
+  },
+  {
+   "id": "s3",
+   "file": "public/img/stock/s3.jpg",
+   "w": 1200,
+   "h": 800,
+   "source": "https://unsplash.com/photos/jetFxhDXXLU",
+   "image": "https://images.unsplash.com/photo-1766475554436-82d116d96c60",
+   "author": "Winston Chen",
+   "license": "Unsplash License (free, not Unsplash+)",
+   "alt": "파란 기둥 사이로 노란 천장크레인이 지나는 공장 내부"
+  },
+  {
+   "id": "s4",
+   "file": "public/img/stock/s4.jpg",
+   "w": 1200,
+   "h": 800,
+   "source": "https://unsplash.com/photos/eWUqHP5S3Z4",
+   "image": "https://images.unsplash.com/photo-1776090188332-1bbad85e7ce3",
+   "author": "LISK OBE",
+   "license": "Unsplash License (free, not Unsplash+)",
+   "alt": "천장 철골 아래 와이어에 걸린 크레인 훅"
+  },
+  {
+   "id": "s5",
+   "file": "public/img/stock/s5.jpg",
+   "w": 1200,
+   "h": 800,
+   "source": "https://unsplash.com/photos/TJ8YzRIiNfg",
+   "image": "https://images.unsplash.com/photo-1781156771445-404a80d7ee7a",
+   "author": "Declan Sun",
+   "license": "Unsplash License (free, not Unsplash+)",
+   "alt": "공장 천장의 철골 보와 크레인 주행 레일"
+  },
+  {
+   "id": "s6",
+   "file": "public/img/stock/s6.jpg",
+   "w": 1200,
+   "h": 799,
+   "source": "https://unsplash.com/photos/uqRk_ik5_uY",
+   "image": "https://images.unsplash.com/photo-1784916313628-d6525ab2199f",
+   "author": "Peter Herrmann",
+   "license": "Unsplash License (free, not Unsplash+)",
+   "alt": "노란 천장크레인이 설치된 넓은 공장 건물 내부"
+  }
+ ]
+}

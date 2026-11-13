@@ -5,7 +5,8 @@ import { OPEN_PAGES, PLACES, getPage, pagePath, pageEncodedPath, cityPath, cityE
 import { compose } from '../../lib/compose';
 import { breadcrumbJsonLd, faqJsonLd, itemListJsonLd, serviceJsonLd } from '../../lib/jsonld';
 import { BRAND, shareMeta } from '../../lib/site';
-import { Actions, Crumbs, IconArrow, JsonLd, SectionHead } from '../../components/Common';
+import { Actions, Crumbs, IconArrow, JsonLd, SectionHead, PhotoStrip } from '../../components/Common';
+import { pagePhotos } from '../../lib/photos';
 
 export const dynamicParams = false;
 
@@ -34,6 +35,7 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
   const P = PLACES[p.place];
   const rel = related(p);
   const path = pageEncodedPath(p);
+  const ph = pagePhotos(p.slug);
   const relList = [...rel.samePlace, ...rel.sameCity, ...rel.otherCities].map((x) => ({ name: x.kw, path: pageEncodedPath(x) }));
 
   return (
@@ -45,7 +47,8 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
         itemListJsonLd(relList.length ? relList : [{ name: `${p.city} 출장 지역 안내`, path: cityEncodedPath(p.city) }]),
       ]} />
 
-      <section className="top top-page">
+      <section className="top top-page top-kw">
+        <figure className="kw-photo"><img src={ph.hero.src} alt={ph.hero.alt} width={ph.hero.w} height={ph.hero.h} fetchPriority="high" /></figure>
         <div className="wrap top-in">
           <div className="top-text">
             <Crumbs items={[{ name: '홈', href: '/' }, { name: '출장 지역', href: '/area/' }, { name: p.city, href: cityPath(p.city) }, { name: c.eyebrow }]} />
@@ -63,6 +66,7 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
           <dl>{c.summary.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
         </section>
       </div>
+      <PhotoStrip photos={ph.strip} label="호이스트·크레인 사진" />
 
       <div className="wrap">
         <section className="sec">

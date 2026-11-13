@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 const DOS = [
   { d: '충남', note: '작업장이 있는 천안을 포함한 출장 지역입니다.' },
   { d: '충북', note: '플레이스 대표 키워드(충북 호이스트)에 맞춘 출장 지역입니다.' },
-  { d: '강원', note: '거리가 있어 작업 내용을 듣고 출장 일정을 통화로 조율합니다.' },
+  { d: '강원', note: '작업 내용을 듣고 방문 일정을 통화로 조율합니다.' },
 ];
 
 export default function AreaIndex() {
@@ -33,7 +33,7 @@ export default function AreaIndex() {
         <div className="wrap">
           <Crumbs items={[{ name: '홈', href: '/' }, { name: '출장 지역' }]} />
           <h1>호이스트 출장 지역</h1>
-          <p className="lead">천안시 동남구 성남면 작업장에서 충남·충북으로 출장합니다. 강원 춘천·홍천·원주·횡성·평창·강릉은 출장 일정을 통화로 조율합니다.</p>
+          <p className="lead">충남·충북 현장으로 방문해 호이스트를 제작·수리합니다. 강원 춘천·홍천·원주·횡성·평창·강릉은 출장 일정을 통화로 조율합니다.</p>
           <Actions />
         </div>
       </section>

@@ -4,7 +4,8 @@ import { CITIES, OPEN_PAGES, openCities, cityPath, pagePath, pageEncodedPath } f
 import { getPosts, postPath } from '../lib/blog';
 import { BRAND, CONTACT, BUSINESS, shareMeta } from '../lib/site';
 import { faqJsonLd, itemListJsonLd } from '../lib/jsonld';
-import { Actions, IconArrow, JsonLd, SectionHead } from '../components/Common';
+import { Actions, IconArrow, JsonLd, SectionHead, PhotoStrip } from '../components/Common';
+import { STOCK } from '../lib/photos';
 
 const HOME_TITLE = `${BRAND} | 호이스트 제작·수리, 중고 호이스트 이전 설치`;
 const HOME_DESC = '천안 성남면 반도기술. 호이스트 제작·수리, 중고 호이스트 중고·이전·설치·매매, 크레인 제작, 무선리모컨 설치, 모터·트로리바·아이빔 행거 제작. 충남·충북 출장.';
@@ -55,7 +56,7 @@ const FLOW = [
 
 const FAQ = [
   { q: '어느 지역까지 출장하나요?', a: '충남(천안·공주·아산·논산·당진·부여·청양·홍성·예산)과 충북(청주·제천·증평·진천·괴산·음성)으로 출장합니다. 강원 춘천·홍천·원주·횡성·평창·강릉은 작업 내용을 듣고 일정을 통화로 조율합니다.' },
-  { q: '비용은 어떻게 정해지나요?', a: '정해 둔 단가표는 없습니다. 고장 부위와 바꿀 부품, 설치 높이, 출장 거리에 따라 달라 명판·현장 사진을 보고 범위를 안내합니다.' },
+  { q: '비용은 어떻게 정해지나요?', a: '정해 둔 단가표는 없습니다. 고장 부위와 바꿀 부품, 설치 높이, 작업 시간대에 따라 달라 명판·현장 사진을 보고 범위를 안내합니다.' },
   { q: '다른 곳에서 설치한 호이스트도 고치나요?', a: '상담합니다. 명판으로 제조사와 형식을 확인하고, 부품을 구할 수 있는지 먼저 알려 드립니다.' },
   { q: '쓰던 호이스트를 새 공장으로 옮길 수 있나요?', a: '중고 호이스트 이전 설치를 합니다. 철거, 운반, 새 현장 레일 확인, 설치, 시운전 순서로 진행합니다.' },
   { q: '영업시간은 어떻게 되나요?', a: `등록된 영업시간이 없습니다. ${CONTACT.phone}로 전화해 확인해 주세요.` },
@@ -78,7 +79,7 @@ export default function Home() {
       <section className="top top-home">
         <div className="wrap top-in">
           <div className="top-text">
-            <p className="kicker">HOIST · CRANE — 충남 천안시 동남구 성남면</p>
+            <p className="kicker">HOIST · CRANE — 충남 · 충북 출장 제작·수리</p>
             <h1><span>호이스트 제작·수리,</span><span>중고 호이스트 이전 설치</span></h1>
             <p className="lead">{BRAND}은 호이스트 본체부터 트롤리·모터, 아이빔 행거, 무선리모컨까지 직접 만들고 고칩니다. 쓰던 호이스트를 새 공장으로 옮겨 다는 일과 중고 매매도 함께 합니다.</p>
             <Actions light />
@@ -89,6 +90,7 @@ export default function Home() {
           </figure>
         </div>
       </section>
+      <PhotoStrip photos={[STOCK[1], STOCK[5], STOCK[0], STOCK[2]]} label="호이스트·크레인 사진" home />
       <div className="facts">
         <div className="wrap">
           <dl className="titleblock">
@@ -132,7 +134,7 @@ export default function Home() {
 
       <div className="wrap">
         <section className="sec workshop">
-          <SectionHead k="WORKSHOP" title="작업장" sub="천안시 동남구 성남면 석곡리에서 제작하고, 현장으로 출장해 설치·수리합니다." />
+          <SectionHead k="WORKSHOP" title="작업장" sub="작업장에서 제작하고, 현장에 방문해 설치·수리합니다." />
           <dl className="info trust" data-reveal>
             <div><dt>주소</dt><dd>{BUSINESS.address}</dd></div>
             <div><dt>지번</dt><dd>성남면 석곡리 421-1</dd></div>
