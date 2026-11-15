@@ -21,6 +21,7 @@ export const BUSINESS = {
 
 // 순차 오픈: 이 묶음 이하의 페이지만 빌드·사이트맵·내부링크에 포함된다 (data/drip.json, scripts/drip/)
 export const OPEN_WAVE = Number(process.env.OPEN_WAVE || 1);
+export const UPDATED = '2026-11-16'; // content revision date - bump when page text changes
 
 export const tel = `tel:${CONTACT.phone.replace(/[^0-9]/g, '')}`;
 export const smsHref = `sms:${CONTACT.phone.replace(/[^0-9]/g, '')}`;

@@ -1,6 +1,6 @@
 // 공통 UI — 이모지 없이 선 아이콘, 각진(0~4px) 버튼, 영문 라벨 섹션 머리(번호 없음).
 import Link from 'next/link';
-import { BRAND, CONTACT, BUSINESS, tel, smsHref } from '../lib/site';
+import { BRAND, CONTACT, BUSINESS, UPDATED, tel, smsHref } from '../lib/site';
 import type { Photo } from '../lib/photos';
 
 export const JsonLd = ({ data }: { data: object | object[] }) => (
@@ -86,7 +86,7 @@ export const Footer = () => (
       <div>
         <strong className="foot-brand">{BRAND}</strong>
         <p>호이스트 제작·수리 · 중고 호이스트 중고·이전·설치·매매 · 크레인 제작 · 무선리모컨 설치 · 모터·트로리바 제작 설치 · 아이빔 행거 제작</p>
-        <p><Link href="/area/">출장 지역</Link> · <Link href="/blog/">호이스트 정비 노트</Link> · <a href="/rss.xml">RSS</a></p>
+        <p><Link href="/about/">소개</Link> · <Link href="/area/">출장 지역</Link> · <Link href="/blog/">호이스트 정비 노트</Link> · <a href="/rss.xml">RSS</a></p>
       </div>
       <dl className="foot-info">
         <div><dt>상호</dt><dd>{BRAND}</dd></div>
@@ -96,7 +96,7 @@ export const Footer = () => (
         <div><dt>영업시간</dt><dd>미등록 · 통화로 확인</dd></div>
       </dl>
     </div>
-    <div className="wrap foot-bottom">© {new Date().getFullYear()} {BRAND} · 상담 때 받은 연락처와 현장 주소는 방문·견적 안내에만 씁니다.</div>
+    <div className="wrap foot-bottom">© {new Date().getFullYear()} {BRAND} · 최종 수정 <time dateTime={UPDATED}>{UPDATED}</time> · 상담 때 받은 연락처와 현장 주소는 방문·견적 안내에만 씁니다.</div>
   </footer>
 );
 
