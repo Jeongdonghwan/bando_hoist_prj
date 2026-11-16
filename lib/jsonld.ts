@@ -1,4 +1,4 @@
-import { SITE_URL, SITE_NAME, BRAND, CONTACT, BUSINESS } from './site';
+import { SITE_URL, SITE_NAME, BRAND, CONTACT, BUSINESS, UPDATED } from './site';
 
 // 업체 — 플레이스 주소·좌표. 영업시간은 미등록이라 넣지 않는다.
 export const businessJsonLd = () => ({
@@ -33,7 +33,7 @@ export const faqJsonLd = (faqs: { q: string; a: string }[]) => ({
 
 export const serviceJsonLd = (o: { name: string; type: string; description: string; path: string; area: string }) => ({
   '@context': 'https://schema.org', '@type': 'Service', name: o.name, serviceType: o.type, description: o.description,
-  url: `${SITE_URL}${o.path}`, areaServed: { '@type': 'Place', name: o.area }, provider: { '@id': `${SITE_URL}/#business` },
+  url: `${SITE_URL}${o.path}`, areaServed: { '@type': 'Place', name: o.area }, dateModified: UPDATED, provider: { '@id': `${SITE_URL}/#business` },
 });
 
 // 캐러셀 ItemList — 같은 도메인 절대 URL, path 는 인코딩된 경로
