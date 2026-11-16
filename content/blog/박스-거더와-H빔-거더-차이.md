@@ -7,8 +7,8 @@ pattern: compare
 industry: 호이스트
 channel: null
 region: null
-date:
-publishedAt:
+date: 2026-11-23
+publishedAt: 2026-11-23
 ---
 
 ## 짧고 가벼우면 H빔, 길고 무거우면 박스입니다

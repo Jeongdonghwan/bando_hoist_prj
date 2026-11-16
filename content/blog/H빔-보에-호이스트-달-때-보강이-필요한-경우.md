@@ -7,8 +7,8 @@ pattern: make
 industry: 호이스트
 channel: null
 region: null
-date:
-publishedAt:
+date: 2026-11-22
+publishedAt: 2026-11-22
 ---
 
 ## 보가 원래 받던 하중과 다른 힘이 걸리면 보강을 검토합니다
