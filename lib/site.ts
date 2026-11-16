@@ -4,7 +4,7 @@
 //   주소 뒤의 '구보다농기계충남동부대리점'은 같은 건물 표기라 쓰지 않는다. 영업시간 미등록.
 
 // 도메인 미정 — 지금은 로컬 미리보기 주소. 정해지면 SITE_URL 환경변수 또는 이 기본값을 바꾼다.
-export const SITE_URL = process.env.SITE_URL || 'http://127.0.0.1:18993';
+export const SITE_URL = process.env.SITE_URL || 'https://xn--ok0bu9hz2hsog.kr';
 export const BRAND = '반도기술';
 export const SITE_NAME = `${BRAND} | 호이스트 제작·수리 · 중고 호이스트 이전 설치`;
 

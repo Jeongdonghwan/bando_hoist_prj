@@ -21,7 +21,7 @@ from rebatch import rebatch  # noqa: E402
 ROOT = HERE.parent
 SRC = ROOT / 'keywords' / '반도기술_키워드.xlsx'
 OUT_XLSX = ROOT / 'keywords' / '반도기술_키워드_페이지.xlsx'
-SITE_URL = 'http://127.0.0.1:18993'  # 도메인 정해지면 lib/site.ts 와 같이 바꾼다
+SITE_URL = 'https://xn--ok0bu9hz2hsog.kr'  # 도메인 정해지면 lib/site.ts 와 같이 바꾼다
 BASE, EXTRA_SIZE = 1000, 400
 
 sys.stdout.reconfigure(encoding='utf-8')

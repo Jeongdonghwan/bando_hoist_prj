@@ -52,7 +52,7 @@ bash scripts/deploy.sh <묶음> <URL>  # git remote(origin) 필요 — 아직 �
 - 금지 지킴: 이모지·알약 버튼·라벨 칩·숫자 띠·섹션 번호·베이지·마키·지어낸 도표 없음.
 
 ## 받아야 할 정보 → `lib/site.ts`
-- [ ] 도메인 (지금 SITE_URL = http://127.0.0.1:18993, `data/drip.json` siteUrl 도 임시)
+- [ ] 도메인 (지금 SITE_URL = https://xn--ok0bu9hz2hsog.kr, `data/drip.json` siteUrl 도 임시)
 - [ ] 오픈일 → `schedule_posts.py <오픈일>` (지금 launch null → WAVE=0)
 - [ ] 서치어드바이저·서치콘솔 소유확인 코드 (NAVER_VERIFY·GOOGLE_VERIFY 비어 있음)
 - [ ] 영업시간, 사업자등록번호
