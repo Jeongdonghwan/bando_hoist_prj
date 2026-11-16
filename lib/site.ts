@@ -8,7 +8,7 @@ export const SITE_URL = process.env.SITE_URL || 'http://127.0.0.1:18993';
 export const BRAND = '반도기술';
 export const SITE_NAME = `${BRAND} | 호이스트 제작·수리 · 중고 호이스트 이전 설치`;
 
-export const CONTACT = { phone: '010-8819-9119' }; // 영업시간 미등록 → 통화로 확인
+export const CONTACT = { phone: '010-4894-4795' }; // 영업시간 미등록 → 통화로 확인
 
 export const BUSINESS = {
   name: BRAND,

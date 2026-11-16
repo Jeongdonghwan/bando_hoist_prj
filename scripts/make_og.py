@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / 'public' / 'og'
 W, H = 1200, 630
 SAFE_L, SAFE_W = 300, 600
-BRAND, PHONE = '반도기술', '010-8819-9119'  # lib/site.ts 와 맞출 것
+BRAND, PHONE = '반도기술', '010-4894-4795'  # lib/site.ts 와 맞출 것
 NAVY, RED, GRID = (18, 50, 79), (229, 50, 45), (38, 70, 99)
 _FONTS = [(r'C:\Windows\Fonts\malgunbd.ttf', r'C:\Windows\Fonts\malgun.ttf', r'C:\Windows\Fonts\consola.ttf'),
           ('/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc', '/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc', '/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf')]
