@@ -8,7 +8,7 @@ import { Actions, IconArrow, JsonLd, SectionHead, PhotoStrip } from '../componen
 import { STOCK } from '../lib/photos';
 
 const HOME_TITLE = `${BRAND} | 호이스트 제작·수리, 중고 호이스트 이전 설치`;
-const HOME_DESC = '천안 성남면 반도기술. 호이스트 제작·수리, 중고 호이스트 중고·이전·설치·매매, 크레인 제작, 무선리모컨 설치, 모터·트로리바·아이빔 행거 제작. 충남·충북 출장.';
+const HOME_DESC = '천안 성남면 반도기술. 호이스트 제작·수리·이전·설치, 중고 호이스트 매매, 크레인 제작, 무선리모컨 설치. 충남·충북 출장.';
 export const metadata: Metadata = {
   title: HOME_TITLE,
   description: HOME_DESC,
