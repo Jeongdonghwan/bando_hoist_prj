@@ -168,7 +168,7 @@ function regionParas(p: Page, P: Place, C: City, n: N): { heading: string; paras
     paras.push(`${cityLine} ${cx}`, `${roadLine} ${tier}`);
     spots = rotate([...C.spots, ...P.subs.filter((x) => !C.spots.includes(x))], s, 'sp').slice(0, 8);
   } else if (P.kind === '구') {
-    paras.push(`${j(n.lb, '은')} ${P.note}. ${pick<T>([
+    paras.push(`${j(n.lb, '은')} ${P.note.replace(/구다$/, '구입니다').replace(/있다$/, '있습니다')}. ${pick<T>([
       (x) => `구 안에서도 도심 작업장과 외곽 공장의 호이스트 쓰임이 다릅니다.`,
       (x) => `그래서 ${x.lb} 현장은 동네마다 작업장 크기와 천장 높이가 크게 다릅니다.`,
       (x) => `읍·면 쪽은 창고형 작업장, 동 쪽은 소규모 정비·제조 작업장이 많습니다.`,
@@ -487,39 +487,26 @@ const STEPS: Record<string, { t: string; d: T[] }[]> = {
 
 // ---------- FAQ ----------
 const FAQ_POOL: { q: T; a: T; w?: string; g?: G[] }[] = [
-  { q: (n) => `${n.lb}까지 출장이 되나요?`, a: (n) => pick(TIER_LINE[CITIES[n.city].tier], n.kw, 'fq')(n) + '. 현장 주소와 작업 내용을 알려 주시면 방문 날짜를 정합니다.' },
-  { q: (n) => `${n.lb} ${n.wl} 비용은 어떻게 정해지나요?`, a: (n) => '정해 둔 단가표는 없습니다. 고장 부위, 바꿀 부품, 설치 높이, 작업 시간대에 따라 달라 명판·현장 사진을 보고 범위를 안내합니다.', g: ['price', 'base'] },
+  { q: (n) => `${n.lb}까지 출장이 되나요?`, a: (n) => pick(TIER_LINE[CITIES[n.city].tier], n.kw, 'fq')(n) + `. ${n.lb} 현장 주소와 작업 내용을 알려 주시면 방문 날짜를 정합니다.` },
+  { q: (n) => `${n.lb} ${n.wl} 비용은 어떻게 정해지나요?`, a: (n) => `정해 둔 단가표가 없어 ${n.lb} 현장도 고장 부위, 바꿀 부품, 설치 높이, 작업 시간대에 따라 달라집니다. 명판·현장 사진을 보고 범위를 안내합니다.`, g: ['price', 'base'] },
   { q: (n) => '다른 곳에서 설치한 호이스트도 수리하나요?', a: (n) => '상담합니다. 명판 사진으로 제조사와 형식을 확인하고, 부품 수급이 되는지 먼저 알려 드립니다.', w: '호이스트수리' },
   { q: (n) => '오래된 호이스트도 고칠 수 있나요?', a: (n) => '부품을 구할 수 있는지가 관건입니다. 명판을 확인한 뒤 수리와 교체 중 어느 쪽이 나은지 말씀드립니다.', w: '호이스트수리' },
-  { q: (n) => '펜던트 스위치를 무선리모컨으로 바꿀 수 있나요?', a: (n) => `${BRAND}은 무선리모컨 설치를 합니다. 기존 호이스트에 수신기를 달고 버튼 방향과 비상정지를 맞춰 시험합니다.` },
+  { q: (n) => '펜던트 스위치를 무선리모컨으로 바꿀 수 있나요?', a: (n) => `${BRAND}은 무선리모컨 설치를 합니다. ${n.lb} 현장의 기존 호이스트에 수신기를 달고 버튼 방향과 비상정지를 맞춰 시험합니다.` },
   { q: (n) => '레일을 걸 아이빔이 없는데 설치가 되나요?', a: (n) => '천장 보 구조를 보고 아이빔 행거를 제작해 레일 자리를 만듭니다. 건물 구조에 따라 방식이 달라 현장 확인이 먼저입니다.', w: '호이스트제작' },
-  { q: (n) => '쓰던 호이스트를 새 공장으로 옮길 수 있나요?', a: (n) => '중고 호이스트 이전 설치를 합니다. 철거, 운반, 새 현장 레일 확인, 설치, 시운전 순서로 진행합니다.' },
+  { q: (n) => '쓰던 호이스트를 새 공장으로 옮길 수 있나요?', a: (n) => `중고 호이스트 이전 설치를 합니다. ${n.lb} 현장도 철거, 운반, 새 현장 레일 확인, 설치, 시운전 순서로 진행합니다.` },
   { q: (n) => '중고 호이스트도 판매하나요?', a: (n) => '중고 호이스트 매매를 합니다. 현장의 들 무게와 양정, 레일 폭, 전원에 맞는지 확인한 뒤 안내합니다.', g: ['sell', 'pick', 'base'] },
   { q: (n) => '크레인 형태로도 만들 수 있나요?', a: (n) => '크레인 제작을 합니다. 작업장 전체를 오가며 들어야 하면 거더와 주행 장치를 포함한 크레인 형태로 만듭니다.', w: '호이스트제작' },
-  { q: (n) => '견적을 받으려면 무엇을 보내면 되나요?', a: (n) => '명판 사진, 호이스트 전체 모습, 레일과 천장 사진, 증상이나 원하는 작업, 현장 주소를 보내 주세요.' },
-  { q: (n) => '영업시간이 어떻게 되나요?', a: (n) => `등록된 영업시간이 없어 통화로 확인해 주세요. 전화는 ${CONTACT.phone}입니다.` },
+  { q: (n) => '견적을 받으려면 무엇을 보내면 되나요?', a: (n) => `명판 사진, 호이스트 전체 모습, 레일과 천장 사진, 증상이나 원하는 작업, ${n.lb} 현장 주소를 보내 주세요.` },
+  { q: (n) => '영업시간이 어떻게 되나요?', a: (n) => `등록된 영업시간이 없어 ${n.lb} 현장 상담 시간은 통화로 확인해 주세요. 전화는 ${CONTACT.phone}입니다.` },
   { q: (n) => '안전검사 대상인지 어떻게 아나요?', a: (n) => '정격하중과 설치 형태, 사용 장소에 따라 다릅니다. 해당 여부는 검사기관이나 안전보건공단에 확인하는 것이 정확합니다.', g: ['check', 'as', 'base'] },
   { q: (n) => '트롤리 바퀴가 닳았는데 그것만 바꿀 수 있나요?', a: (n) => '바퀴와 트롤리 상태를 보고 부분 수리 또는 트로리바 새 제작 중에서 정합니다. 모터 교체도 함께 상담합니다.', w: '호이스트수리' },
-  { q: (n) => '라인을 오래 못 세우는데 작업 시간을 맞출 수 있나요?', a: (n) => '작업 쉬는 시간이나 휴일에 맞추는 일정은 통화로 정합니다. 미리 사진을 받아 부품을 준비하면 현장 시간을 줄일 수 있습니다.' },
+  { q: (n) => '라인을 오래 못 세우는데 작업 시간을 맞출 수 있나요?', a: (n) => `작업 쉬는 시간이나 휴일에 맞추는 일정은 통화로 정합니다. 미리 사진을 받아 부품을 준비하면 ${n.lb} 현장 시간을 줄일 수 있습니다.` },
 ];
 
-export interface Composed {
-  title: string; description: string; h1: string; eyebrow: string; lead: string; answer: string;
-  summary: [string, string][];
-  region: { heading: string; paras: string[]; spots: string[]; spotsTitle: string };
-  view: View;
-  scope: { heading: string; sub: string; rows: { name: string; d: string; focus: boolean }[] };
-  steps: { heading: string; items: { t: string; d: string }[] };
-  info: [string, string][];
-  faq: { q: string; a: string }[];
-  cta: string;
-  closing: { heading: string; text: string };
-  wl: string; drawing: string;
-}
 
 const WL: Record<string, string> = { 호이스트: '호이스트', 호이스트수리: '호이스트 수리', 호이스트제작: '호이스트 제작' };
 
-export function compose(p: Page): Composed {
+export function compose(p: Page) {
   const P = PLACES[p.place];
   const C = CITIES[p.city];
   const s = p.slug;
@@ -546,32 +533,81 @@ export function compose(p: Page): Composed {
   const title = pick([
     `${p.kw} | ${BRAND}`, `${p.kw} - ${WL[p.word]}${p.mod ? ` ${p.mod}` : ''} 안내 | ${BRAND}`, `${p.kw} | ${tierShort} ${BRAND}`,
   ], s, 'tt').slice(0, 60);
-  const d0 = `${pick(GROUP_ANSWER[g], s, 'ga')(n)}.`;
-  const description = (d0.length < 70 ? `${d0} ${BRAND} ${tierShort}, ${CONTACT.phone}.` : d0).slice(0, 158);
+  // ---- 2026-11-24 레이 모범 구조: 기존 재료를 절 6개 한 문단으로 묶는다(분류 줄 → h1+수식어 → 설명 → 핵심 요약 → 절 6개 → FAQ → 관련 링크) ----
+  const k = p.kw;
+  const wl = WL[p.word];
+  const ph = CONTACT.phone;
+  const nmx = n.nm;
+  const SHORT: Record<string, string> = { 제작: '호이스트 제작', 수리: '호이스트 수리', 중고: '중고 호이스트 이전 설치', 크레인: '크레인 제작', 리모컨: '무선리모컨 설치', 모터: '트로리바 교체', 행거: '아이빔 행거 제작' };
+  const fs = focus.map((x) => SHORT[x]);
+  const sents = (t: string) => t.split(/(?<=[.?!])\s+/).map((x) => x.trim()).filter(Boolean);
+  const len = (t: string) => t.replace(/\s/g, '').length;
+  // 지역 이름이 든 문장을 먼저 이어 붙여 한 문단 210~290자(공백 제외)
+  const fit = (src: string[]) => {
+    const all = src.flatMap(sents);
+    const keep = new Set<number>();
+    let n = 0;
+    const tier = (x: string) => (x.includes(k) ? 0 : x.includes(nmx) ? 1 : 2); // 키워드 → 지역 이름 → 나머지 순으로 고른다
+    for (const t of [0, 1, 2]) all.forEach((x, i) => {
+      if (keep.has(i) || tier(x) !== t || n >= 255 || (n && n + len(x) > 320)) return;
+      keep.add(i); n += len(x);
+    });
+    return all.filter((_, i) => keep.has(i)).join(' ');
+  };
+  const stems = [lb, nmx, p.city].map((x) => x.replace(/(시|군|구|동|읍|면)$/, '')).filter((x) => x.length >= 2);
+  const region = regionParas(p, P, C, n);
+  const sp = region.spots.filter((x) => !stems.some((t) => x.includes(t)));
+  const h1sub = pick([
+    `${fs[0]}부터 ${fs[1]}까지`,
+    `${tierShort} 현장 방문 상담`,
+    sp.length ? `${sp[0]} 작업장까지 방문` : `명판 확인 뒤 ${fs[0]}`,
+    `명판 확인 뒤 ${fs[0]}`,
+  ], s, 'h1');
+  const view = (() => { const v = viewFor(g, p, n); v.paras.unshift(pick(MOD_LINE[p.mod] || BASE_LINE[p.word], s, 'ml')(n)); return v; })();
+  const viewList = view.list ? [`${view.list.title}은 ${view.list.items.join(', ')}입니다.`] : [];
+  const viewTable = view.table ? view.table.slice(0, 2).map(([a, b]) => `${j(a, '은')} ${b.replace(/[.]$/, '')}입니다.`.replace(/다입니다\.$/, '다.')) : [];
+  const tierLine = pick(TIER_LINE[C.tier], s, 'tl5')(n);
+  const viewSub = view.heading.replace(k, '').replace(new RegExp(`^${lb}(에서|의|은|는)?`), '').replace(/^[,\s—·]+/, '').trim() || `${wl} 안내`;
+  const KW_AT = new Set([0, 1, 2, 5]);
+  const SECS: { sub: string[]; p: string }[] = [
+    { sub: ['현장 여건', '호이스트를 쓰는 곳', '작업장과 출장'], p: fit([...region.paras, `${nmx} 현장은 천장 구조와 레일 길이가 작업장마다 달라 사진과 실측으로 먼저 봅니다.`, `${nmx} 현장 위치는 통화 때 주소로 확인하고 방문 일정을 정합니다.`, `${k} 상담도 이 현장 여건을 먼저 듣고 시작합니다.`]) },
+    { sub: [viewSub], p: fit([...view.paras, ...viewList, ...viewTable, `${nmx} 현장 ${wl} 문의는 명판 사진과 증상을 먼저 보내 주시면 판단이 빨라집니다.`, `${nmx} 작업장 천장 구조와 레일 상태를 함께 보면 ${wl} 작업 범위가 정해집니다.`, `${nmx} 현장 상담에서는 본체와 레일, 트롤리, 조작 장치를 한 번에 봅니다.`]) },
+    { sub: ['맡는 작업 범위', `${BRAND}이 맡는 일`, '작업 범위'], p: fit([`${k} 문의로 ${nmx} 현장에서 ${BRAND}이 주로 맡는 일은 ${rows.map((r) => r.name).join(', ')}입니다.`, ...rows.map((r) => `${r.d}.`), `${k} 문의에서 정한 작업 범위는 방문 전에 통화로 한 번 더 확인합니다.`]) },
+    { sub: ['진행 순서', '상담부터 시운전까지', '진행 흐름'], p: fit([
+      `${k} 일은 ${steps.map((x) => x.t).join(', ')} 순서로 진행합니다.`,
+      ...steps.map((x) => `${nmx} 현장 ${x.t} 단계에서는 ${x.d}.`),
+      `${nmx} 현장 작업 시간은 라인 일정을 듣고 통화로 정합니다.`,
+    ]) },
+    { sub: ['상담 전에 준비할 것', '방문 전 확인', '통화 전에 챙길 것'], p: pick([
+      `${nmx} 현장 상담 전에는 호이스트 명판 사진 한 장을 먼저 준비해 주세요. 명판에 적힌 제조사와 형식을 보면 ${wl} 부품과 작업 방법을 미리 가늠할 수 있습니다. 여기에 ${nmx} 작업장 천장 높이와 레일 길이, 들어 올리는 물건 종류를 함께 알려 주시면 방문 날 준비물이 정해집니다. ${nmx} 호이스트에 증상이 있다면 언제부터, 어떤 동작에서 생기는지도 적어 두세요. ${nmx} 작업장 출입 시간과 주차 자리도 알려 주시면 방문 준비가 짧아집니다. ${k} 상담 전화는 ${ph}입니다.`,
+      `${k} 문의는 세 가지가 정리되면 빨라집니다. 첫째는 ${nmx} 현장 주소와 작업장 출입 가능 시간, 둘째는 호이스트 명판과 레일·천장 사진, 셋째는 원하는 작업이 수리인지 제작인지 이전 설치인지입니다. 아직 정하지 못했다면 ${nmx} 현장 상황만 들려주셔도 함께 정합니다. ${nmx} 현장 사진은 문자로 보내 주시면 됩니다. ${nmx} 작업장 천장 높이와 레일 길이를 함께 알려 주시면 준비물이 정해집니다. ${k} 상담 전화는 ${ph}입니다.`,
+      `${nmx} 작업장이 라인을 오래 세울 수 없다면 쉬는 시간이나 휴일 일정을 먼저 알려 주세요. 미리 사진을 받아 부품을 준비하면 ${nmx} 현장에 머무는 시간을 줄일 수 있습니다. ${wl} 작업 범위가 정해지지 않았어도 상담은 됩니다. 명판 사진과 증상, 현장 위치를 통화나 문자로 남겨 주시면 ${nmx} 방문 날짜를 잡습니다. ${nmx} 작업장 천장 높이와 레일 길이도 함께 알려 주시면 준비물이 정해집니다. ${k} 상담 전화는 ${ph}입니다.`,
+    ], s, 'p4') },
+    { sub: ['출장과 상담', '방문 일정 잡기', '상담 안내'], p: pick([
+      `${tierLine}. ${k} 상담은 ${ph}으로 받고, 등록된 영업시간이 없어 통화 가능 시간은 전화로 확인해 주세요. ${nmx} 현장은 증상과 위치를 먼저 듣고 필요한 부품을 챙겨 방문합니다. 방문 날짜는 ${nmx} 작업장 일정에 맞춰 통화로 정하고, 작업 뒤에는 시운전으로 동작을 함께 확인합니다. ${tierShort}이라 ${nmx} 주변 일정과 묶어 날짜를 잡기도 합니다. ${nmx} 현장 사진을 문자로 보내 주셔도 됩니다.`,
+      `${nmx} 현장 ${wl} 상담은 전화 한 통으로 시작합니다. ${tierLine}. 명판 사진과 증상, 원하는 작업을 문자로 먼저 보내 주시면 ${nmx} 방문 일정을 맞춥니다. ${tierShort}이라 ${nmx} 주변 지역 일정과 묶어 날짜를 잡기도 합니다. ${k} 상담 전화는 ${ph}이고, 등록된 영업시간이 없어 통화 가능 시간은 전화로 확인해 주세요. ${nmx} 현장 일정은 작업장 쉬는 시간에 맞춰 잡을 수도 있습니다.`,
+      `${k} 문의는 ${ph}으로 받습니다. ${tierLine}. 제작·수리·중고 이전 설치 가운데 무엇이 맞는지 정하지 않았어도 ${nmx} 현장 상황을 듣고 함께 정합니다. 무선리모컨 설치나 트로리바 교체처럼 주변 장치 일도 ${nmx} 방문 때 같이 봅니다. 방문 날짜는 ${nmx} 작업장 일정에 맞춰 통화로 정하고, 작업 뒤에는 시운전으로 동작을 함께 확인합니다. ${nmx} 현장 명판 사진을 먼저 보내 주시면 준비가 빨라집니다.`,
+    ], s, 'p5') },
+  ];
+  const sections = SECS.map((x, i) => {
+    const sub = pick(x.sub, s, `sub${i}`);
+    return { h: KW_AT.has(i) ? `${k}${i % 2 ? ' — ' : ': '}${sub}` : sub, p: x.p };
+  });
+  const summary = `${answer} ${nmx} 현장은 ${tierShort}이고, 상담은 ${ph}으로 받습니다. ${nmx} 현장 명판 사진과 증상을 문자로 보내 주시면 방문 준비가 빨라집니다. ${wl} 외에 무선리모컨 설치나 트로리바 교체도 ${nmx} 방문 때 함께 상담합니다.`;
+  const facts: [string, string][] = [['지역', P.admin], ['작업', `${wl}${modTxt}`], ['출장', tierShort], ['상담', ph]];
+
+  // description 45~80자(§5-3): 키워드 → 관련 작업 → 사실 → 상담 전화
+  const descs = pick([
+    [`${k} — ${j(fs[0], '과')} ${fs[1]}. ${tierShort} 현장 방문, 상담 ${ph}`, `${k} — ${fs[0]}. ${tierShort} 현장 방문, 상담 ${ph}`],
+    [`${k}, ${nmx} 작업장으로 방문해 ${j(fs[0], '을')} 합니다. 상담 ${ph}`, `${k}, ${nmx} 현장 방문 ${fs[0]}. 상담 ${ph}`],
+    [`${k} — 명판 사진으로 ${fs[0]} 상담. ${tierShort}, ${ph}`, `${k} — ${fs[0]} 상담 ${ph}`],
+  ], s, 'desc');
+  const description = [...descs, `${k} — 현장 방문 상담 ${ph}`].find((d) => d.length >= 50 && d.length <= 80) || descs[descs.length - 1];
 
   return {
-    title, description, h1: p.kw, wl: WL[p.word],
-    eyebrow: `${P.admin} · ${WL[p.word]}${modTxt}`,
-    lead, answer,
-    summary: [['지역', P.admin], ['작업', `${WL[p.word]}${modTxt}`], ['출장', tierShort], ['상담', CONTACT.phone]],
-    region: regionParas(p, P, C, n),
-    view: (() => { const v = viewFor(g, p, n); v.paras.unshift(pick(MOD_LINE[p.mod] || BASE_LINE[p.word], s, 'ml')(n)); return v; })(),
-    scope: {
-      heading: pick([`${lb} ${BRAND} 작업 범위`, `${BRAND}이 ${lb}에서 맡는 일`, `${lb} 현장 작업 범위`], s, 'sch'),
-      sub: pick([`플레이스 소개에 적은 작업을 ${WL[p.word]} 기준으로 정리했습니다.`, `${WL[p.word]}에 가까운 작업을 위에 두었습니다.`, `호이스트 본체부터 주변 장치까지 한 곳에서 이어서 봅니다.`], s, 'scs'),
-      rows,
-    },
-    steps: { heading: pick([`${p.kw} 진행 순서`, `${lb} 현장 진행 순서`, `${WL[p.word]} 진행 흐름`], s, 'sth'), items: steps },
-    info: [
-      ['상호', BRAND],
-      ['작업장', BUSINESS.address],
-      ['전화', CONTACT.phone],
-      ['출장', pick(TIER_LINE[C.tier], s, 'inf')(n)],
-      ['영업시간', '등록된 영업시간 없음 · 통화로 확인'],
-      ['상담 작업', `${WL[p.word]}${modTxt} · 중고 호이스트 이전·설치·매매 · 무선리모컨`],
-    ],
+    title, description, h1sub, wl, lead, summary, facts, sections,
+    cat: `${P.admin} · ${wl}${modTxt}`,
     faq: faqs,
-    cta: pick([`${lb} 현장 명판 사진과 증상을 먼저 알려 주시면 통화가 짧아집니다.`, `${lb} 호이스트 사진과 현장 주소를 보내 주세요. 방문 날짜를 정합니다.`, `${p.kw} 상담은 전화로 받습니다. 작업 내용과 위치만 먼저 알려 주세요.`], s, 'cta'),
     closing: {
       heading: pick([`${lb} 현장 주소와 호이스트 사진만 알려 주세요`, `${lb} 호이스트 일, 통화로 먼저 정리합니다`, `${p.kw}, 증상과 위치부터 듣습니다`], s, 'clh'),
       text: pick([
@@ -580,6 +616,6 @@ export function compose(p: Page): Composed {
         `${WL[p.word]} 상담 ${CONTACT.phone}. ${lb} 현장 사진을 문자로 보내 주셔도 됩니다.`,
       ], s, 'clt'),
     },
-    drawing: p.word === '호이스트제작' ? 'crane' : p.word === '호이스트수리' ? 'hoist' : pick(['hoist', 'hanger'], s, 'dr'),
   };
 }
+export type Composed = ReturnType<typeof compose>;
