@@ -530,9 +530,6 @@ export function compose(p: Page) {
   if (!faqs.some((f) => f.q.includes('출장'))) faqs[2] = { q: FAQ_POOL[0].q(n), a: FAQ_POOL[0].a(n) };
 
   const modTxt = p.mod ? ` ${p.mod}` : '';
-  const title = pick([
-    `${p.kw} | ${BRAND}`, `${p.kw} - ${WL[p.word]}${p.mod ? ` ${p.mod}` : ''} 안내 | ${BRAND}`, `${p.kw} | ${tierShort} ${BRAND}`,
-  ], s, 'tt').slice(0, 60);
   // ---- 2026-11-24 레이 모범 구조: 기존 재료를 절 6개 한 문단으로 묶는다(분류 줄 → h1+수식어 → 설명 → 핵심 요약 → 절 6개 → FAQ → 관련 링크) ----
   const k = p.kw;
   const wl = WL[p.word];
@@ -557,12 +554,16 @@ export function compose(p: Page) {
   const stems = [lb, nmx, p.city].map((x) => x.replace(/(시|군|구|동|읍|면)$/, '')).filter((x) => x.length >= 2);
   const region = regionParas(p, P, C, n);
   const sp = region.spots.filter((x) => !stems.some((t) => x.includes(t)));
-  const h1sub = pick([
+  // h1 수식어 = title 앞부분. '키워드 수식어'가 40자 이하인 벌을 해시 순서대로 고르고, 없으면 짧은 벌
+  const h1subs = [
     `${fs[0]}부터 ${fs[1]}까지`,
     `${tierShort} 현장 방문 상담`,
     sp.length ? `${sp[0]} 작업장까지 방문` : `명판 확인 뒤 ${fs[0]}`,
     `명판 확인 뒤 ${fs[0]}`,
-  ], s, 'h1');
+  ];
+  const h1k = seedOf(`${s}::h1`) % h1subs.length;
+  const h1sub = [...h1subs.slice(h1k), ...h1subs.slice(0, h1k)].find((x) => `${p.kw} ${x}`.length <= 40) || '현장 방문 상담';
+  const title = `${p.kw} ${h1sub} | ${BRAND}`; // 앞부분은 h1 글자와 같다. 상호는 끝에 한 번
   const view = (() => { const v = viewFor(g, p, n); v.paras.unshift(pick(MOD_LINE[p.mod] || BASE_LINE[p.word], s, 'ml')(n)); return v; })();
   const viewList = view.list ? [`${view.list.title}은 ${view.list.items.join(', ')}입니다.`] : [];
   const viewTable = view.table ? view.table.slice(0, 2).map(([a, b]) => `${j(a, '은')} ${b.replace(/[.]$/, '')}입니다.`.replace(/다입니다\.$/, '다.')) : [];
